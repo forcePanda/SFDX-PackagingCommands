@@ -53,7 +53,7 @@
                 "clear": false
             }
         },
-        { // Package version with Id
+        { // Create Package version
             "label": "SFDX Package: Create Package version",
             "type": "shell",
             "command": "sfdx",
@@ -84,7 +84,7 @@
             "args": [
                 "force:package:version:promote",
                 "--package",
-                "${input:packageId}"
+                "${input:packageVersionId}"
             ],
             "group": "build",
             "problemMatcher" : [],
@@ -154,6 +154,26 @@
                 "showReuseMessage": true,
                 "clear": false
             }
+        },
+        { // List all package versions
+            "label": "SFDX Package: Get All Package Versions",
+            "type": "shell",
+            "command": "sfdx",
+            "args": [
+                "force:package:version:list",
+                "--packages",
+                "${input:packageId}"
+            ],
+            "group": "build",
+            "problemMatcher" : [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
         }
     ],
     "inputs": [
@@ -192,6 +212,11 @@
                 "Managed","Unlocked"
             ],
             "default": "Unlocked"
+        },
+        {
+            "id": "packageVersionId",
+            "description": "Enter package version ID",
+            "type": "promptString"
         }
     ]
 }
